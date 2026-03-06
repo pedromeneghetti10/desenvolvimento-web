@@ -6,48 +6,85 @@
 </head>
 <body>
 
-    <header></header>
-        <h1>Pedro Henrique</h1>
-        <img src="download.jpeg" alt="Foto de Pedro Henrique" />
-        <p>Grande futebolista</p>
-        <p>Planalto - RS</p>
-</header>
+  <header>
+    <h1>Pedro Henrique</h1>
+    <img src="download.jpeg" alt="Foto de Pedro Henrique" />
+    <p>Grande futebolista</p>
+    <p>Planalto - RS</p>
+  </header>
 
-    <main>
+  <main>
 
     <section>
-        <h2>Sobre mim</h2>
-        <p>Olá! Sou Pedro Henrique Teles Meneghetti, um grande futebolista do Planalto Gaúcho.</p>
+      <h2>Sobre mim</h2>
+      <p>Olá! Sou Pedro Henrique Teles Meneghetti, um grande futebolista do Planalto Gaúcho.</p>
     </section>
 
     <section>
-        <h2>Habilidades</h2>
-        <p>Corte para direita e batida em gol</p>
-    </section>    
+      <h2>Habilidades</h2>
+      <p>Corte para direita e batida em gol</p>
+    </section>
 
-    <section>
-      <h2>Deixe um comentário</h2>
+  <section>
+    <h2>Deixe um comentário</h2>
+    <form id="formComentario">
       <label>Nome:</label><br />
-      <input type="text" placeholder="Seu nome" /><br /><br />
+      <input type="text" id="nome" placeholder="Seu nome" /><br /><br />
       <label>Mensagem:</label><br />
-      <textarea placeholder="Sua mensagem"></textarea><br /><br />
-      <button>Enviar</button>
-    </section>
+      <textarea id="mensagem" placeholder="Sua mensagem"></textarea><br /><br />
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
 
     <section>
       <h2>Comentários</h2>
-
-      <p><strong>João:</strong> Cara, você é craque mesmo!</p>
-      <p><strong>Maria:</strong> Vi você jogar no domingo, que golaço!</p>
-      <p><strong>Carlos:</strong> Orgulho do Planalto!</p>
+      <div id="comentarios"></div>
     </section>
 
   </main>
 
-    <footer>
-        <h2>Contato</h2>
-        <p>pedro@exemplo.com.</p>
-    </footer>
+  <footer>
+    <h2>Contato</h2>
+    <p>pedro@exemplo.com</p>
+  </footer>
+
+  <script>
+    async function carregarComentarios() {
+      const res = await fetch('http://localhost:3000/comentarios');
+      const comentarios = await res.json();
+
+      const div = document.getElementById('comentarios');
+      div.innerHTML = '';
+      comentarios.forEach(c => {
+        div.innerHTML += `<p><strong>${c.nome}:</strong> ${c.mensagem}</p>`;
+      });
+    }
+
+    document.getElementById('formComentario').addEventListener('submit', async function(event) {
+      event.preventDefault(); // impede a página de recarregar
+
+      const nome = document.getElementById('nome').value;
+      const mensagem = document.getElementById('mensagem').value;
+
+      if (!nome || !mensagem) {
+        alert('Preencha o nome e a mensagem!');
+        return;
+      }
+
+      await fetch('http://localhost:3000/comentarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, mensagem })
+      });
+
+      document.getElementById('nome').value = '';
+      document.getElementById('mensagem').value = '';
+
+      carregarComentarios();
+    });
+
+    carregarComentarios();
+  </script>
 
 </body>
 </html>

@@ -1,8 +1,11 @@
     const express = require('express');
+    const cors = require('cors');
 
     const PORT = 3000;
     const app = express();
     app.use(express.json());
+    app.use(cors());
+    app.use(express.static('HTML'));
 
 
     let usuarios = [
@@ -83,6 +86,37 @@
         return res.status(204).send(); // 204 No Content = deletado com sucesso
     });
 
+    // daqui pra baixo é o código da atividade de comentários
+
+    // serve os arquivos HTML
+app.use(express.static('HTML'));
+
+let comentarios = [
+  { id: 1, nome: "João", mensagem: "Cara, você é craque mesmo!" },
+  { id: 2, nome: "Maria", mensagem: "Vi você jogar no domingo, que golaço!" },
+  { id: 3, nome: "Carlos", mensagem: "Orgulho do Planalto!" },
+];
+
+app.get('/comentarios', (req, res) => {
+  res.json(comentarios);
+});
+
+app.post('/comentarios', (req, res) => {
+  const { nome, mensagem } = req.body;
+
+  if (!nome || !mensagem) {
+    return res.status(400).json({ erro: "Nome e mensagem são obrigatórios" });
+  }
+
+  const novoComentario = {
+    id: comentarios.length + 1,
+    nome,
+    mensagem
+  };
+
+  comentarios.push(novoComentario);
+  return res.status(201).json(novoComentario);
+});
 
     app.listen(PORT, () => {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
