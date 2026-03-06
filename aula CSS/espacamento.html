@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Espaçamento</title>
+
+<style>
+
+#caixa{
+    background-color: rgb(201, 173, 230);
+    border: 5px solid rgb(0, 0, 0);
+    padding: 20px;
+    margin: 20px;
+    width: 200px;
+}
+
+.container{
+    margin-bottom: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Controle de Espaçamento</h2>
+
+<div class="container">
+    Padding:
+    <input type="range" min="0" max="250" value="20" id="paddingInput">
+</div>
+
+<div class="container">
+    Border:
+    <input type="range" min="0" max="40" value="5" id="borderInput">
+</div>
+
+<div class="container">
+    Margin:
+    <input type="range" min="0" max="300" value="20" id="marginInput">
+</div>
+
+<br>
+
+<div id="caixa">
+    Exemplo 
+</div>
+
+<script>
+
+const caixa = document.getElementById("caixa");
+
+document.getElementById("paddingInput").addEventListener("input", function(){
+    caixa.style.padding = this.value + "px";
+});
+
+document.getElementById("borderInput").addEventListener("input", function(){
+    caixa.style.borderWidth = this.value + "px";
+});
+
+document.getElementById("marginInput").addEventListener("input", function(){
+    caixa.style.margin = this.value + "px";
+});
+
+</script>
+
+</body>
+</html>
