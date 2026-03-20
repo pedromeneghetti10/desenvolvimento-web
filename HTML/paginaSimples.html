@@ -2,11 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Meu Perfil</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <header>
+  <header class="site-header">
     <h1>Pedro Henrique</h1>
     <img src="download.jpeg" alt="Foto de Pedro Henrique" />
     <p>Grande futebolista</p>
@@ -25,18 +26,18 @@
       <p>Corte para direita e batida em gol</p>
     </section>
 
-  <section>
+  <section class="full form-section">
     <h2>Deixe um comentário</h2>
     <form id="formComentario">
-      <label>Nome:</label><br />
+      <label for="nome">Nome:</label><br />
       <input type="text" id="nome" placeholder="Seu nome" /><br /><br />
-      <label>Mensagem:</label><br />
+      <label for="mensagem">Mensagem:</label><br />
       <textarea id="mensagem" placeholder="Sua mensagem"></textarea><br /><br />
       <button type="submit">Enviar</button>
     </form>
   </section>
 
-    <section>
+    <section class="full comments-section">
       <h2>Comentários</h2>
       <div id="comentarios"></div>
     </section>
