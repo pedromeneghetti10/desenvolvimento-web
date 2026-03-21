@@ -1,91 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meu Perfil</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta http-equiv="refresh" content="0; url=home.html" />
+  <title>Redirecionando...</title>
 </head>
 <body>
-  <header class="site-header">
-    <h1>Pedro Henrique</h1>
-    <img src="download.jpeg" alt="Foto de Pedro Henrique" />
-    <p>Grande futebolista</p>
-    <p>Planalto - RS</p>
-  </header>
-
-  <main>
-
-    <section>
-      <h2>Sobre mim</h2>
-      <p>Olá! Sou Pedro Henrique Teles Meneghetti, um grande futebolista do Planalto Gaúcho.</p>
-    </section>
-
-    <section>
-      <h2>Habilidades</h2>
-      <p>Corte para direita e batida em gol</p>
-    </section>
-
-  <section class="full form-section">
-    <h2>Deixe um comentário</h2>
-    <form id="formComentario">
-      <label for="nome">Nome:</label><br />
-      <input type="text" id="nome" placeholder="Seu nome" /><br /><br />
-      <label for="mensagem">Mensagem:</label><br />
-      <textarea id="mensagem" placeholder="Sua mensagem"></textarea><br /><br />
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-
-    <section class="full comments-section">
-      <h2>Comentários</h2>
-      <div id="comentarios"></div>
-    </section>
-
-  </main>
-
-  <footer>
-    <h2>Contato</h2>
-    <p>pedro@exemplo.com</p>
-  </footer>
-
-  <script>
-    async function carregarComentarios() {
-      const res = await fetch('http://localhost:3000/comentarios');
-      const comentarios = await res.json();
-
-      const div = document.getElementById('comentarios');
-      div.innerHTML = '';
-      comentarios.forEach(c => {
-        div.innerHTML += `<p><strong>${c.nome}:</strong> ${c.mensagem}</p>`;
-      });
-    }
-
-    document.getElementById('formComentario').addEventListener('submit', async function(event) {
-      event.preventDefault(); // impede a página de recarregar
-
-      const nome = document.getElementById('nome').value;
-      const mensagem = document.getElementById('mensagem').value;
-
-      if (!nome || !mensagem) {
-        alert('Preencha o nome e a mensagem!');
-        return;
-      }
-
-      await fetch('http://localhost:3000/comentarios', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, mensagem })
-      });
-
-      document.getElementById('nome').value = '';
-      document.getElementById('mensagem').value = '';
-
-      carregarComentarios();
-    });
-
-    carregarComentarios();
-  </script>
-
+  <p>Redirecionando para <a href="home.html">Home</a>.</p>
 </body>
 </html>
